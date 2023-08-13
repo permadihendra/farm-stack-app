@@ -1,0 +1,20 @@
+version: "3"
+services:
+  farmstack:
+    mongo:
+      image: mongo:latest
+      ports:
+        - 27017:27017
+      volumes:
+        - mongodata:/data/db
+    fastapi:
+      image: fastapi:latest
+      build:
+        context: ./fastapi
+      ports:
+        - 8000:8000
+      depends_on:
+        - mongo
+
+volumes:
+  mongodata:
